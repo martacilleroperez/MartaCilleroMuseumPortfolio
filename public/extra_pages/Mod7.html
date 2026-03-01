@@ -16,37 +16,50 @@
         font-size: 2rem;
         margin: 0;
         padding: 2rem;
-        background: #8a8687;
+        background: #8a8a8a;
         color: #faf8f8;
       }
 
       .Mod7__wrap {
-        display: flex;
-        gap: 2rem;
-        align-items: center;
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 1.5rem;
-        border: 1px solid rgb(184, 28, 28);
-        border-radius: 12px;
+      display: flex;
+      gap: 0.1rem;
+      align-items: center;
+      max-width: 1100px;
+      background: #7a7a7a;
+      margin: 0 auto;
+      padding: 1.5rem;
+      border-radius: 12px;
+      flex-wrap: wrap; 
+      
       }
 
       .Mod7__avatar {
-        width: 200px;
-        height: 200px;
-        object-fit: cover;
+        width: min(530px, 100%);  /* never exceed 420px, but can shrink to fit */
+        aspect-ratio: 1 / 1;      /* keeps it square without fixed height */
+        height: auto;
+        object-fit: contain;   
         border-radius: 12px;
-        transition: transform 150ms ease;
-        transform-origin: center;
+        overflow: hidden;    
+        display: block;  
+        flex: 0 1 420px;          /* plays nicely with flex */
+      }
+
+      /* TEXT area can shrink/grow properly */
+      .Mod7__content {
+        flex: 1 1 280px;          /* takes remaining space, but can wrap */
+        min-width: 0;             /* prevents weird overflow in flex layouts */
       }
 
       /* MAke pic bigger when hover */
       .Mod7__avatar:hover {
-        transform: scale(1.5);
+        transform: scale(1.3);
+      }
+      .Mod7__avatar_1:hover {
+        transform: scale(1.3);
       }
 
       .back {
-        display: inline-block;
+        display:inline-block;
         margin-bottom: 1rem;
         color: rgb(73, 72, 72);
         background: rgba(55, 54, 54, 0.08);
@@ -55,6 +68,25 @@
         padding: 0.5rem 1rem;
         border-radius: 8px;
       }
+
+      /* PHONE / SMALL SCREENS */
+    @media (max-width: 700px) {
+      body {
+        padding: 1rem;
+        font-size: 1.4rem;      /* optional: 2rem is huge on phones */
+      }
+
+      .Mod6__wrap {
+        flex-direction: column; /* stack image above text */
+        align-items: stretch;
+      }
+
+      .Mod6__avatar {
+        width: 100%;
+        max-width: 520px;       /* optional: keeps it from being massive on tablets */
+        margin: 0 auto;
+      }
+    }
     </style>
   </head>
 
@@ -63,11 +95,10 @@
 
     <section class="Mod7" id="Mod7">
       <div class="Mod7__wrap">
-        <img
-          class="Mod7__avatar my-photo animate__animated"
-          src="/map.png"
-          alt="My pic"
-        />
+
+        <img class="Mod7__avatar" src="/img/Mod7_1.png" alt="My pic" />
+
+
         <div class="Mod7__content">
           <h2>Gamifying strechaing with the use of AI </h2>
           <p> Stretching is important for the health and flexibility of muscles, but most people are unaware that it must happen on a regular basis. 

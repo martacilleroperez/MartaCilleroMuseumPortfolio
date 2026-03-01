@@ -34,3 +34,20 @@ git add .
 git commit -m "Describe what you changed"
 git push
 
+git status
+git add .
+git commit -m "added sections"
+git push
+
+------
+
+maybe vite.config to show good in git : 
+
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  base: "/MartaCilleroMuseumPortfolio/",
+  build: {
+    minify: "terser",
+  },
+});

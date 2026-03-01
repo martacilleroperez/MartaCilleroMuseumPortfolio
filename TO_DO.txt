@@ -1,0 +1,17 @@
+
+
+TO DO :
+
+- In mod 8 chnage- simplify the text
+- In mod 6 - do i ad it ? do styling 
+- Chnage intro squares wiht text (wiht the two buttons) - all 
+- Do Trayectory 
+    - places were i studied 
+    - softs skills 
+    - hards skills 
+- Redo image 
+    - change parts of teh layout
+    - Add contact part 
+- Redo collitiosn 
+- Add conatcat slide 
+- Add side map

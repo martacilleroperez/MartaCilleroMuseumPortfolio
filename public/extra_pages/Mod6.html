@@ -16,7 +16,7 @@
         font-size: 2rem;
         margin: 0;
         padding: 2rem;
-        background: #8a8687;
+        background: #8a8a8a;
         color: #faf8f8;
       }
 
@@ -24,20 +24,28 @@
         display: flex;
         gap: 2rem;
         align-items: center;
-        max-width: 900px;
+        max-width: 1100px;
+        background: #7a7a7a;
         margin: 0 auto;
         padding: 1.5rem;
-        border: 1px solid rgb(184, 28, 28);
         border-radius: 12px;
+        flex-wrap: wrap;          /* allows wrapping instead of overflow */
       }
 
       .Mod6__avatar {
-        width: 200px;
-        height: 200px;
-        object-fit: cover;
+        width: min(420px, 100%);  /* never exceed 420px, but can shrink to fit */
+        aspect-ratio: 1 / 1;      /* keeps it square without fixed height */
+        height: auto;
+        object-fit: contain;   /* NO cropping */
         border-radius: 12px;
-        transition: transform 150ms ease;
-        transform-origin: center;
+        flex: 0 1 420px;  
+        border-radius: 12px;        /* plays nicely with flex */
+      }
+
+      /* TEXT area can shrink/grow properly */
+      .Mod6__content {
+        flex: 1 1 280px;          /* takes remaining space, but can wrap */
+        min-width: 0;             /* prevents weird overflow in flex layouts */
       }
 
       /* MAke pic bigger when hover */
@@ -55,6 +63,26 @@
         padding: 0.5rem 1rem;
         border-radius: 8px;
       }
+
+      /* PHONE / SMALL SCREENS */
+    @media (max-width: 700px) {
+      body {
+        padding: 1rem;
+        font-size: 1.4rem;      /* optional: 2rem is huge on phones */
+      }
+
+      .Mod6__wrap {
+        flex-direction: column; /* stack image above text */
+        align-items: stretch;
+      }
+
+      .Mod6__avatar {
+        width: 100%;
+        max-width: 520px;       /* optional: keeps it from being massive on tablets */
+        margin: 0 auto;
+      }
+
+    }
     </style>
   </head>
 
@@ -65,9 +93,14 @@
       <div class="Mod6__wrap">
         <img
           class="Mod6__avatar my-photo animate__animated"
-          src="/map.png"
+          src="/img/Mod6_2.png"
           alt="My pic"
         />
+        <img
+        class="Mod6__avatar my-photo animate__animated"
+        src="/img/Mod6_1.png"
+        alt="My pic"
+      />
         <div class="Mod6__content">
           <h2>Real time feedback on overstriding for runners</h2>
           <p>Overstriding is one of the most common issues in runners nowadays, especially in amateur runners. This happens when a 

@@ -15,37 +15,45 @@
         font-size: 2rem;
         margin: 0;
         padding: 2rem;
-        background: #8a8687;
+        background: #8a8a8a;
         color: #faf8f8;
       }
 
       .Mod8A__wrap {
-        display: flex;
-        gap: 2rem;
-        align-items: center;
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 1.5rem;
-        border: 1px solid rgb(184, 28, 28);
-        border-radius: 12px;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      max-width: 1100px;
+      background: #7a7a7a;
+      margin: 0 auto;
+      padding: 1.5rem;
+      border-radius: 12px;
+      flex-wrap: wrap;          /* allows wrapping instead of overflow */
       }
 
       .Mod8A__avatar {
-        width: 200px;
-        height: 200px;
-        object-fit: cover;
-        border-radius: 12px;
-        transition: transform 150ms ease;
-        transform-origin: center;
+      width: min(490px, 100%);
+      height: auto;
+      object-fit: contain;
+
+      border-radius: 12px;
+      overflow: hidden;    
+      display: block;      
+    }
+
+      /* TEXT area can shrink/grow properly */
+      .Mod8A__content {
+        flex: 1 1 280px;          /* takes remaining space, but can wrap */
+        min-width: 0;             /* prevents weird overflow in flex layouts */
       }
 
       /* MAke pic bigger when hover */
       .Mod8A__avatar:hover {
-        transform: scale(1.5);
+        transform: scale(1.2);
       }
 
       .back {
-        display: inline-block;
+        display:inline-block;
         margin-bottom: 1rem;
         color: rgb(73, 72, 72);
         background: rgba(55, 54, 54, 0.08);
@@ -54,6 +62,25 @@
         padding: 0.5rem 1rem;
         border-radius: 8px;
       }
+      
+      /* PHONE / SMALL SCREENS */
+    @media (max-width: 700px) {
+      body {
+        padding: 1rem;
+        font-size: 1.4rem;      /* optional: 2rem is huge on phones */
+      }
+
+      .Mod8A__wrap {
+        flex-direction: column; /* stack image above text */
+        align-items: stretch;
+      }
+
+      .Mod8A__avatar {
+        width: 100%;
+        max-width: 520px;       /* optional: keeps it from being massive on tablets */
+        margin: 0 auto;
+      } 
+    }
     </style>
   </head>
 
@@ -62,11 +89,12 @@
 
     <section class="Mod8A" id="Mod8A">
       <div class="Mod8A__wrap">
-        <img
-          class="Mod8A__avatar my-photo animate__animated"
-          src="/map.png"
-          alt="My pic"
-        />
+  
+        <img class="Mod8A__avatar my-photo animate__animated" src="/img/Mod8A_2.png" alt="My pic" />
+
+        <img class="Mod8A__avatar my-photo animate__animated" src="/img/Mod8A_1.png" alt="My pic" />
+        <img class="Mod8A__avatar my-photo animate__animated" src="/img/Mod8A_3.png" alt="My pic" />
+
         <div class="Mod8A__content">
           <h2>Interactive game for runners with the use of IMU sensors</h2>
           <p>The aim of the project focuses on developing an IMU (Internal measurement unit) con- trolled running game to involve and invite
