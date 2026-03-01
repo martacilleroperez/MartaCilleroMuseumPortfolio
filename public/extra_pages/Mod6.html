@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+ 
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mod6</title>
+    <style>
+      @font-face {
+        font-family: monogram;
+        src: url("/monogram.ttf");
+      }
+
+      body {
+        font-family: monogram, monospace;
+        font-size: 2rem;
+        margin: 0;
+        padding: 2rem;
+        background: #8a8687;
+        color: #faf8f8;
+      }
+
+      .Mod6__wrap {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 1.5rem;
+        border: 1px solid rgb(184, 28, 28);
+        border-radius: 12px;
+      }
+
+      .Mod6__avatar {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 12px;
+        transition: transform 150ms ease;
+        transform-origin: center;
+      }
+
+      /* MAke pic bigger when hover */
+      .Mod6__avatar:hover {
+        transform: scale(1.5);
+      }
+
+      .back {
+        display:inline-block;
+        margin-bottom: 1rem;
+        color: rgb(73, 72, 72);
+        background: rgba(55, 54, 54, 0.08);
+        text-decoration: none;
+        border: 1px solid rgb(73, 72, 72);
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="back" href="/index.html">Back</a>
+
+    <section class="Mod6" id="Mod6">
+      <div class="Mod6__wrap">
+        <img
+          class="Mod6__avatar my-photo animate__animated"
+          src="/map.png"
+          alt="My pic"
+        />
+        <div class="Mod6__content">
+          <h2>Real time feedback on overstriding for runners</h2>
+          <p>Overstriding is one of the most common issues in runners nowadays, especially in amateur runners. This happens when a 
+            runner’s foot lands heel-first well in front of the knee. After talking with experts as well as doing literature research we developed a prototype. 
+
+            This consists of exoskeleton with rotary joints, with potentiometers used to measure the angles of the lower limbs. 
+            Based on these angles it is determined whether the runner is overstriding. Then for the feedback, there is a bracelet consisting
+            of a vibration motor that gives the user haptic feedback during their run.
+            The vibration works as a metronome to guide the user's step rate.</p>
+        </div>
+      </div>
+    </section>
+
+  </body>
+</html>

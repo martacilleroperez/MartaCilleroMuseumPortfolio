@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mod8B</title>
+    <style>
+      @font-face {
+        font-family: monogram;
+        src: url("/monogram.ttf");
+      }
+
+      body {
+        font-family: monogram, monospace;
+        font-size: 2rem;
+        margin: 0;
+        padding: 2rem;
+        background: #8a8687;
+        color: #faf8f8;
+      }
+
+      .Mod8B__wrap {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 1.5rem;
+        border: 1px solid rgb(184, 28, 28);
+        border-radius: 12px;
+      }
+
+      .Mod8B__avatar {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 12px;
+        transition: transform 150ms ease;
+        transform-origin: center;
+      }
+
+      /* MAke pic bigger when hover */
+      .Mod8B__avatar:hover {
+        transform: scale(1.5);
+      }
+
+      .back {
+        display: inline-block;
+        margin-bottom: 1rem;
+        color: rgb(73, 72, 72);
+        background: rgba(55, 54, 54, 0.08);
+        text-decoration: none;
+        border: 1px solid rgb(73, 72, 72);
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="back" href="/index.html">Back</a>
+
+    <section class="Mod8B" id="Mod8B">
+      <div class="Mod8B__wrap">
+        <img
+          class="Mod8B__avatar my-photo animate__animated"
+          src="/map.png"
+          alt="My pic"
+        />
+        <div class="Mod8B__content">
+          <h2>Adiiction awarenes installation </h2>
+          <p>The goal was to show young adults the consequences of two common addictions, smoking and drinking. Young adults often engage in these behaviors without 
+            knowing the long-term effects on three of the most important organs of the body ( heart, brain, liver, and lungs) .
+            At the beginning of the installation, the user walks into an operating room with an operating bed with an open human body lying on it. To achive this, 
+            the organs were made with real size latex balloons  controlled by a pneumatic system (allowing the heart to beat and the lungs to get filled with air as well as the changing sizes of the organs). This  also had LED strips that showed the change in color of the effect. 
+            .
+            On a nearby table lie some objects representing the addiction and the degree of it (different sizes of bottles for alcohol and weights of packs of cigarettes for smoking).
+             Next to this table, there is a pedestal where the user can grab the bottle or pack to see the effect this would have over time on the human body.
+            In the case of alcohol, for example, the beating heart is getting bigger, the liver is increasing in size and changing color, and the brain is getting smaller.
+            And all of this continues till the body in the table dies due to excessive consumption of the substance. 
+            The intensity of these effects is related to the addiction chosen and the level of it by the user.
+            Moreover, the room also has 360 audio that accompanies the addiction, as well as a screen where values that can not be represented physically are shown.
+            Furthermore, the user can also use a puzzle to select the organs, so if they want to see the effects on  (as in, if you take out the liver piece from the puzzle, this one will stop showing in the body).
+            </p>
+        </div>
+      </div>
+    </section>
+
+  </body>
+</html>

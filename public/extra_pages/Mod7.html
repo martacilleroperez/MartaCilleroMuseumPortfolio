@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mod7</title>
+    <style>
+      @font-face {
+        font-family: monogram;
+        src: url("/monogram.ttf");
+      }
+
+      body {
+        font-family: monogram, monospace;
+        font-size: 2rem;
+        margin: 0;
+        padding: 2rem;
+        background: #8a8687;
+        color: #faf8f8;
+      }
+
+      .Mod7__wrap {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 1.5rem;
+        border: 1px solid rgb(184, 28, 28);
+        border-radius: 12px;
+      }
+
+      .Mod7__avatar {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 12px;
+        transition: transform 150ms ease;
+        transform-origin: center;
+      }
+
+      /* MAke pic bigger when hover */
+      .Mod7__avatar:hover {
+        transform: scale(1.5);
+      }
+
+      .back {
+        display: inline-block;
+        margin-bottom: 1rem;
+        color: rgb(73, 72, 72);
+        background: rgba(55, 54, 54, 0.08);
+        text-decoration: none;
+        border: 1px solid rgb(73, 72, 72);
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="back" href="/index.html">Back</a>
+
+    <section class="Mod7" id="Mod7">
+      <div class="Mod7__wrap">
+        <img
+          class="Mod7__avatar my-photo animate__animated"
+          src="/map.png"
+          alt="My pic"
+        />
+        <div class="Mod7__content">
+          <h2>Gamifying strechaing with the use of AI </h2>
+          <p> Stretching is important for the health and flexibility of muscles, but most people are unaware that it must happen on a regular basis. 
+            Our project aims to gamify streaching  such that it happens as a byproduct of playing a game similar to the "hole on the wall". 
+            So the user initiates the game and it has to match the poses of the screen.
+            To determine the pose we are using an AI pose recigniton algorithm (an SVM machine), that looks at the shape, recognizing it, and then it 
+            determines how close the player was to the desired position and gives or extracts points ot the player based on this.
+            </p>
+        </div>
+      </div>
+    </section>
+
+  </body>
+</html>

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mod8A</title>
+    <style>
+      @font-face {
+        font-family: monogram;
+        src: url("/monogram.ttf");
+      }
+
+      body {
+        font-family: monogram, monospace;
+        font-size: 2rem;
+        margin: 0;
+        padding: 2rem;
+        background: #8a8687;
+        color: #faf8f8;
+      }
+
+      .Mod8A__wrap {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 1.5rem;
+        border: 1px solid rgb(184, 28, 28);
+        border-radius: 12px;
+      }
+
+      .Mod8A__avatar {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 12px;
+        transition: transform 150ms ease;
+        transform-origin: center;
+      }
+
+      /* MAke pic bigger when hover */
+      .Mod8A__avatar:hover {
+        transform: scale(1.5);
+      }
+
+      .back {
+        display: inline-block;
+        margin-bottom: 1rem;
+        color: rgb(73, 72, 72);
+        background: rgba(55, 54, 54, 0.08);
+        text-decoration: none;
+        border: 1px solid rgb(73, 72, 72);
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="back" href="/index.html">Back</a>
+
+    <section class="Mod8A" id="Mod8A">
+      <div class="Mod8A__wrap">
+        <img
+          class="Mod8A__avatar my-photo animate__animated"
+          src="/map.png"
+          alt="My pic"
+        />
+        <div class="Mod8A__content">
+          <h2>Interactive game for runners with the use of IMU sensors</h2>
+          <p>The aim of the project focuses on developing an IMU (Internal measurement unit) con- trolled running game to involve and invite
+             more young people into the sport of running, as well as to create a possibility for people recovering from lower-body trauma.
+              In such a rehabilitation scenario, the system could act as a distraction factor against pain. The system uses two IMUs, one on 
+              the head and one on the leg, to control a real-time game that provides immediate feedback based on the runner’s motion parameters. 
+              The key parameters were extracted from the IMU data using custom algorithms and visualized through drifferent game elements.
+            
+            </p>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,8 +1,12 @@
 import { dialogueData, scaleFactor } from "./constants";
 import { k } from "./kaboomCtx";
 import { displayDialogue, setCamScale } from "./utils";
+const saved = sessionStorage.getItem("playerState");
+const savedState = saved ? JSON.parse(saved) : null;
 
-k.loadSprite("spritesheet", "./spritesheet.png", {
+
+// loadind images and tools 
+k.loadSprite("spritesheet", "/spritesheet.png", {
   sliceX: 39,
   sliceY: 31,
   anims: {
@@ -15,66 +19,186 @@ k.loadSprite("spritesheet", "./spritesheet.png", {
   },
 });
 
-k.loadSprite("map", "./map.png");
 
-k.setBackground(k.Color.fromHex("#311047"));
+k.loadSprite("floor", "/floorplan.PNG")
 
+
+k.setBackground(k.Color.fromHex("#610716"));
+
+
+// defining the main scene
 k.scene("main", async () => {
-  const mapData = await (await fetch("./map.json")).json();
+  const mapData = await (await fetch("/Plano_p.json")).json();
   const layers = mapData.layers;
+  function getProp(obj, key) {
+    return obj.properties?.find((p) => p.name === key)?.value;
+  }
 
-  const map = k.add([k.sprite("map"), k.pos(0), k.scale(scaleFactor)]);
+  function addPolygonAsWalls(world, boundary, thickness = 3, tag = "boundary") {
+    const pts = boundary.polygon;
+    if (!pts || pts.length < 2) return;
+  
+    const ox = boundary.x;
+    const oy = boundary.y;
+  
+    for (let i = 0; i < pts.length; i++) {
+      const a = pts[i];
+      const b = pts[(i + 1) % pts.length];
+  
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+  
+      const len = Math.hypot(dx, dy);
+      if (len < 0.0001) continue;
+  
+      const midX = (a.x + b.x) / 2;
+      const midY = (a.y + b.y) / 2;
+  
+      // rotate() is DEGREES
+      const angDeg = (Math.atan2(dy, dx) * 180) / Math.PI;
+  
+      world.add([
+        k.pos(ox + midX, oy + midY),
+        k.rotate(angDeg),
+        k.area({
+          shape: new k.Rect(k.vec2(-len / 2, -thickness / 2), len, thickness),
+        }),
+        k.body({ isStatic: true }),
+        tag,
+      ]);
+    }
+  }
+  function polygonBounds(poly) {
+    const xs = poly.map((p) => p.x);
+    const ys = poly.map((p) => p.y);
 
+    
+    
+    const minX = Math.min(...xs);
+    const maxX = Math.max(...xs);
+    const minY = Math.min(...ys);
+    const maxY = Math.max(...ys);
+  
+    return { x: minX, y: minY, w: maxX - minX, h: maxY - minY };
+  }
+
+  const floor = k.add([ k.sprite("floor"), k.pos(0), k.scale(scaleFactor),]);
+
+  // keep an invisible "world" container for collisions (like your old `map`)
+const world = k.add([
+  k.pos(0 ),
+  k.scale(scaleFactor),
+]);
+
+// craete the player 
   const player = k.make([
     k.sprite("spritesheet", { anim: "idle-down" }),
     k.area({
       shape: new k.Rect(k.vec2(0, 3), 10, 10),
     }),
-    k.body(),
+    k.body({ gravityScale: 0 }),
     k.anchor("center"),
     k.pos(),
-    k.scale(scaleFactor),
+    k.scale(scaleFactor * 0.7),
     {
-      speed: 250,
+      speed: 150,
       direction: "down",
       isInDialogue: false,
     },
     "player",
   ]);
 
+
+
+  
+  // Loop through map layers: build walls + spawn player ( it craetes an invisible collision box)
   for (const layer of layers) {
-    if (layer.name === "boundaries") {
-      for (const boundary of layer.objects) {
-        map.add([
+    if (layer.name === "triggers") {
+      for (const trig of layer.objects) {
+        // In your JSON the trigger id is stored in properties: { name:"name", value:"about_me" }
+        const triggerId = getProp(trig, "name");
+        if (!triggerId) continue;
+    
+        // Your trigger objects have width/height 0, so we must define a size
+        const size = 18; // tweak (12..30)
+    
+        world.add([
+          k.pos(trig.x, trig.y),
           k.area({
-            shape: new k.Rect(k.vec2(0), boundary.width, boundary.height),
+            shape: new k.Rect(k.vec2(-size / 2, -size / 2), size, size),
           }),
           k.body({ isStatic: true }),
-          k.pos(boundary.x, boundary.y),
-          boundary.name,
+          triggerId, // tag with "about_me", "tray", "Mod6", etc.
+          "trigger",
         ]);
-
-        if (boundary.name) {
-          player.onCollide(boundary.name, () => {
-            player.isInDialogue = true;
-            displayDialogue(
-              dialogueData[boundary.name],
-              () => (player.isInDialogue = false)
-            );
-          });
-        }
+    
+        player.onCollide(triggerId, () => {
+          if (player.isInDialogue) return;
+          player.isInDialogue = true;
+          // wiht this you are assing the trigger id into displayDialogue, the porgram konws which trigger is active.
+          displayDialogue(dialogueData[triggerId], triggerId, () => {
+            player.isInDialogue = false;
+          }, () => ({
+            // stores th pos and direction of the player when you click the button 
+            x: player.pos.x,
+            y: player.pos.y,
+            direction: player.direction,
+          }));
+        });
       }
-
+    
+      continue;
+    }
+    if (layer.name === "boundaries") {
+      for (const boundary of layer.objects) {
+        const tag = boundary.name?.trim() ? boundary.name.trim() : "boundary";
+    
+        //  Polygon objects from Tiled
+        if (boundary.polygon) {
+          addPolygonAsWalls(world, boundary, 3, tag); // thickness=3 (try 2..6)
+          continue;
+        }
+    
+        // Rectangle objects (if any)
+        const w = boundary.width ?? 0;
+        const h = boundary.height ?? 0;
+        if (w <= 0 || h <= 0) continue;
+    
+        world.add([
+          k.pos(boundary.x, boundary.y),
+          k.area({ shape: new k.Rect(k.vec2(0, 0), w, h) }),
+          k.body({ isStatic: true }),
+          tag,
+        ]);
+      }
+    
       continue;
     }
 
+    // add teh palyer to the scene in the start position 
     if (layer.name === "spawnpoints") {
       for (const entity of layer.objects) {
         if (entity.name === "player") {
-          player.pos = k.vec2(
-            (map.pos.x + entity.x) * scaleFactor,
-            (map.pos.y + entity.y) * scaleFactor
-          );
+          // if stored position exists, use it; otherwise use spawn.
+          if (entity.name === "player") {
+            if (savedState?.x != null && savedState?.y != null) {
+              player.pos = k.vec2(savedState.x, savedState.y);
+              player.direction = savedState.direction ?? "down";
+          
+              // set correct idle anim for direction
+              if (player.direction === "down") player.play("idle-down");
+              else if (player.direction === "up") player.play("idle-up");
+              else player.play("idle-side");
+          
+              // optional: clear it so it only restores once
+              sessionStorage.removeItem("playerState");
+            } else {
+              player.pos = k.vec2(entity.x * scaleFactor, entity.y * scaleFactor);
+            }
+          
+            k.add(player);
+            continue;
+          }
           k.add(player);
           continue;
         }
@@ -82,16 +206,18 @@ k.scene("main", async () => {
     }
   }
 
+  // Camera scaling (zoom) for different screens
   setCamScale(k);
 
   k.onResize(() => {
     setCamScale(k);
   });
-
+  // camera following the player 
   k.onUpdate(() => {
     k.camPos(player.worldPos().x, player.worldPos().y - 100);
   });
 
+  // mosue movement for the character to move 
   k.onMouseDown((mouseBtn) => {
     if (mouseBtn !== "left" || player.isInDialogue) return;
 
@@ -138,6 +264,9 @@ k.scene("main", async () => {
     }
   });
 
+
+
+  // Stop animation when the character stops moving 
   function stopAnims() {
     if (player.direction === "down") {
       player.play("idle-down");
@@ -151,6 +280,7 @@ k.scene("main", async () => {
     player.play("idle-side");
   }
 
+  // mouse movments 
   k.onMouseRelease(stopAnims);
 
   k.onKeyRelease(() => {
@@ -205,4 +335,6 @@ k.scene("main", async () => {
   });
 });
 
+
+// strat the scene 
 k.go("main");

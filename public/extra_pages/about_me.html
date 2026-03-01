@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Me</title>
+    <style>
+      @font-face {
+        font-family: monogram;
+        src: url("/monogram.ttf");
+      }
+
+      body {
+        font-family: monogram, monospace;
+        font-size: 2rem;
+        margin: 0;
+        padding: 2rem;
+        background: #8a8687;
+        color: #faf8f8;
+      }
+
+      .about__wrap {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 1.5rem;
+        border: 1px solid rgb(184, 28, 28);
+        border-radius: 12px;
+      }
+
+      .about__avatar {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 12px;
+      }
+
+      .back {
+        display: inline-block;
+        margin-bottom: 1rem;
+        color: rgb(73, 72, 72);
+        background: rgba(55, 54, 54, 0.08);
+        text-decoration: none;
+        border: 1px solid rgb(73, 72, 72);
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="back" href="/index.html">Back</a>
+
+    <section class="about_me" id="about_me">
+      <div class="about__wrap">
+        <img
+          class="about__avatar my-photo animate__animated"
+          src="/map.png"
+          alt="My pic"
+        />
+        <div class="about__content">
+          <h2>About Me</h2>
+          <p>Hi! My name is Marta Cillero, an I am a BSc student in Creative Technology with a strong interest 
+               in AI  and machine learning, particularly in
+               applied and research-oriented contexts. Experienced in interdisciplinary, project-based work combining 
+               programming and human-centred design.  Currently collaborating with a research lab at the University of Zurich on a
+               Generative AI bachelor thesis project, applying machine learning to artistic and cultural heritage contexts. 
+               Motivated to pursue an advanced research at the intersection of AI,  creativity, art  and history 
+            
+            
+            
+            .</p>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const img = document.querySelector(".my-photo");
+      if (img) {
+        img.addEventListener("mouseenter", () => {
+          img.classList.remove("animate__swing"); // reset if already applied
+          void img.offsetWidth; // force reflow so it can replay
+          img.classList.add("animate__swing");
+        });
+
+        img.addEventListener("animationend", () => {
+          img.classList.remove("animate__swing");
+        });
+      }
+    </script>
+  </body>
+</html>

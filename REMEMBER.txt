@@ -1,0 +1,29 @@
+WHEN I DO THE JASON AGIAN RMEBER TO ADD THE :
+
+{
+          "draworder":"topdown",
+          "id":5,
+          "name":"spawnpoints",
+          "objects":[
+                 {
+                  "height":0,
+                  "id":19,
+                  "name":"player",
+                  "point":true,
+                  "rotation":0,
+                  "type":"",
+                  "visible":true,
+                  "width":0,
+                  "x":42.5454545454545,
+                  "y":171.818181818182
+                 }],
+          "opacity":1,
+          "type":"objectgroup",
+          "visible":true,
+          "x":0,
+          "y":0
+          }],
+          AND ALSO EDIT THE LAST LINES !!!!
+
+
+          
