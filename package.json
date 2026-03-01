@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "gh-pages": "^6.3.0",
     "terser": "^5.27.1",
     "vite": "^5.1.0"
   },

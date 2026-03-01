@@ -26,4 +26,11 @@ WHEN I DO THE JASON AGIAN RMEBER TO ADD THE :
           AND ALSO EDIT THE LAST LINES !!!!
 
 
-          
+
+TO TUPDATE THE GIT 
+
+git status
+git add .
+git commit -m "Describe what you changed"
+git push
+

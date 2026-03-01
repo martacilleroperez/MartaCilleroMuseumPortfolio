@@ -1,8 +1,6 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  base: "/",
-  build: {
-    minify: "terser",
-  },
+  // MUST match your repo name exactly:
+  base: "/MartaCilleroMuseumPortfolio/",
 });
