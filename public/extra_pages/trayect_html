@@ -57,7 +57,7 @@
   <body>
     <a class="back" href="/index.html">Back</a>
 
-    <section class="about_me" id="about_me">
+    <section class="tray" id="tray">
       <div class="about__wrap">
         <img
           class="about__avatar my-photo animate__animated"

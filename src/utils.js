@@ -9,7 +9,8 @@ export function displayDialogue(text, triggerId, onDisplayEnd, getPlayerState) {
   const mod7Btn = document.getElementById("Mod7");
   const mod8ABtn = document.getElementById("Mod8A");
   const mod8BBtn = document.getElementById("Mod8B");
-  const trayBtn = document.getElementById("Tray");
+  const trayBtn = document.getElementById("tray");
+  const contBtn = document.getElementById("cont");
 
   // Map: triggerId -> which button + which page
   const actions = {
@@ -18,7 +19,8 @@ export function displayDialogue(text, triggerId, onDisplayEnd, getPlayerState) {
     Mod7: { btn: mod7Btn, url: "/extra_pages/Mod7.html" },
     Mod8A: { btn: mod8ABtn, url: "/extra_pages/Mod8A.html" },
     Mod8B: { btn: mod8BBtn, url: "/extra_pages/Mod8B.html" },
-    tray: { btn: trayBtn, url: "/extra_pages/trayect.html" }, // NOTE: your dialogueData uses "tray" lowercase
+    tray: { btn: trayBtn, url: "/extra_pages/tray.html" }, 
+    cont: { btn: contBtn, url: "/extra_pages/cont.html" },
   };
 
   // show dialog
@@ -26,7 +28,7 @@ export function displayDialogue(text, triggerId, onDisplayEnd, getPlayerState) {
   closeBtn.style.display = "inline-block";
 
   // Hide all "know more" buttons first
-  const allBtns = [aboutBtn, mod6Btn, mod7Btn, mod8ABtn, mod8BBtn, trayBtn].filter(Boolean);
+  const allBtns = [aboutBtn, mod6Btn, mod7Btn, mod8ABtn, mod8BBtn, trayBtn, contBtn].filter(Boolean);
   for (const b of allBtns) b.style.display = "none";
 
   // Pick the correct action for this trigger

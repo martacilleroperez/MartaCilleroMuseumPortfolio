@@ -20,7 +20,7 @@ k.loadSprite("spritesheet", "/spritesheet.png", {
 });
 
 
-k.loadSprite("floor", "/floorplan.PNG")
+k.loadSprite("floor", "/trail4.PNG")
 
 
 k.setBackground(k.Color.fromHex("#610716"));
@@ -28,7 +28,7 @@ k.setBackground(k.Color.fromHex("#610716"));
 
 // defining the main scene
 k.scene("main", async () => {
-  const mapData = await (await fetch("/Plano_p.json")).json();
+  const mapData = await (await fetch("/Plano_2.json")).json();
   const layers = mapData.layers;
   function getProp(obj, key) {
     return obj.properties?.find((p) => p.name === key)?.value;
@@ -99,7 +99,7 @@ const world = k.add([
     k.body({ gravityScale: 0 }),
     k.anchor("center"),
     k.pos(),
-    k.scale(scaleFactor * 0.7),
+    k.scale(scaleFactor* 1.5 ),
     {
       speed: 150,
       direction: "down",
@@ -107,15 +107,12 @@ const world = k.add([
     },
     "player",
   ]);
-
-
-
   
   // Loop through map layers: build walls + spawn player ( it craetes an invisible collision box)
   for (const layer of layers) {
     if (layer.name === "triggers") {
       for (const trig of layer.objects) {
-        // In your JSON the trigger id is stored in properties: { name:"name", value:"about_me" }
+        // In your JSON the trigger id is stored in properties: { name:"name", value:"" }
         const triggerId = getProp(trig, "name");
         if (!triggerId) continue;
     
@@ -128,7 +125,7 @@ const world = k.add([
             shape: new k.Rect(k.vec2(-size / 2, -size / 2), size, size),
           }),
           k.body({ isStatic: true }),
-          triggerId, // tag with "about_me", "tray", "Mod6", etc.
+          triggerId, // tag with "", "tray", "Mod6", etc.
           "trigger",
         ]);
     
