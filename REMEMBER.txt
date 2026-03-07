@@ -31,7 +31,7 @@ TO TUPDATE THE GIT
 
 git status
 git add .
-git commit -m "map, tray and cont"
+git commit -m "menu"
 git push
 
 ------

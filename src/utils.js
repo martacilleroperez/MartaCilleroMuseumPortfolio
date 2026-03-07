@@ -1,7 +1,10 @@
+
+
 export function displayDialogue(text, triggerId, onDisplayEnd, getPlayerState) {
   const dialogueUI = document.getElementById("textbox-container");
   const dialogue = document.getElementById("dialogue");
   const closeBtn = document.getElementById("close");
+
 
   // Buttons
   const aboutBtn = document.getElementById("about_me");
@@ -81,12 +84,16 @@ export function displayDialogue(text, triggerId, onDisplayEnd, getPlayerState) {
   closeBtn.addEventListener("click", onCloseClick);
   window.addEventListener("keypress", onKeyPress);
 
+
   // Attach the click handler to every "know more" button (only one is visible)
   for (const b of allBtns) b.addEventListener("click", onKnowMoreClick);
+
 }
 
-// Adjusts zoom depending on your screen shape
 
+
+
+// Adjusts zoom depending on your screen shape
 export function setCamScale(k) {
   const resizeFactor = k.width() / k.height();
   if (resizeFactor < 1) {

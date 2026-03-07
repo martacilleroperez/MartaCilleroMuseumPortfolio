@@ -2,15 +2,8 @@
 
 TO DO :
 
-MENU 
-- Add menu drop down 
-- Add just project selects 
-    - With back button 
-    - With list of projects 
-- Add intro wrap it in a box 
-
 FINAL
 - Finish image 
 - Add side map
-- change the charcater 
-- redo collitions 
+- Change the charcater 
+- Redo collitions 

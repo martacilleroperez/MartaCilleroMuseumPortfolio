@@ -3,7 +3,88 @@ import { k } from "./kaboomCtx";
 import { displayDialogue, setCamScale } from "./utils";
 const saved = sessionStorage.getItem("playerState");
 const savedState = saved ? JSON.parse(saved) : null;
+const menuButton = document.getElementById("menu");
+const extraText = document.getElementById("extraText");
+const projMenuBtn = document.getElementById("proj_menu");
+const projectsMenu = document.getElementById("projectsMenu");
+const mapButton = document.getElementById("map");
+const mapText = document.getElementById("mapText");
 
+if (mapButton && mapText) {
+  mapButton.addEventListener("click", () => {
+    mapText.classList.toggle("hidden");
+  });
+}
+
+
+if (menuButton && extraText) {
+  menuButton.addEventListener("click", () => {
+    extraText.classList.toggle("hidden");
+  });
+}
+
+const aboutBtn = document.getElementById("about_menu");
+if (aboutBtn) {
+  aboutBtn.addEventListener("click", () => {
+    window.location.href = "/extra_pages/about_me.html";
+  });
+}
+
+const trayBtn = document.getElementById("tray_menu");
+if (trayBtn) {
+  trayBtn.addEventListener("click", () => {
+    window.location.href = "/extra_pages/tray.html";
+  });
+}
+
+const contBtn = document.getElementById("cont_menu");
+if (contBtn) {
+  contBtn.addEventListener("click", () => {
+    window.location.href = "/extra_pages/cont.html";
+  });
+}
+
+
+if (projMenuBtn && projectsMenu) {
+  projMenuBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    projectsMenu.classList.toggle("hidden");
+  });
+}
+
+// Menu navigation buttons
+document.getElementById("about_menu").addEventListener("click", () => {
+  window.location.href = "/extra_pages/about_me.html";
+});
+
+document.getElementById("tray_menu").addEventListener("click", () => {
+  window.location.href = "/extra_pages/tray.html";
+});
+
+document.getElementById("Mod6_menu").addEventListener("click", () => {
+  window.location.href = "/extra_pages/Mod6.html";
+});
+
+document.getElementById("Mod7_menu").addEventListener("click", () => {
+  window.location.href = "/extra_pages/Mod7.html";
+});
+
+document.getElementById("Mod8A_menu").addEventListener("click", () => {
+  window.location.href = "/extra_pages/Mod8A.html";
+});
+
+document.getElementById("Mod8B_menu").addEventListener("click", () => {
+  window.location.href = "/extra_pages/Mod8B.html";
+});
+
+document.getElementById("tesis_menu").addEventListener("click", () => {
+  window.location.href = "/extra_pages/tesis.html";
+});
+
+
+document.getElementById("cont_menu").addEventListener("click", () => {
+  window.location.href = "/extra_pages/cont.html";
+});
 
 // loadind images and tools 
 k.loadSprite("spritesheet", "/spritesheet.png", {
