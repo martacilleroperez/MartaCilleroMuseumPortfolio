@@ -68,7 +68,8 @@
       padding: 1rem 1 rem;
       border-radius: 10px;
 
-      display: inline-block;
+      display: inline-flex;
+      flex-direction: column;
       backdrop-filter: blur(10px);
 
       filter: drop-shadow(0 0 0.5rem rgb(23, 23, 23));
@@ -120,6 +121,16 @@
         filter: drop-shadow(0 0 0.75rem rgb(112, 112, 112));
         /* overflow: auto; */
       }
+
+      .Map__avatar {
+        width: min(500px, 100%);  /* doubled from 500px */
+        aspect-ratio: 1 / 1;       
+        height: auto;
+        object-fit: contain;   
+        overflow: hidden;    
+        display: block;  
+        margin-left: 10px;
+        }
 
       .ui-text {
         margin: 0;
@@ -399,7 +410,7 @@
           <button id="map" class="ui-map-btn">Map</button>
         
           <div id="mapText" class="hidden">
-            <p>Map here</p>
+            <img class="Map__avatar" src="/S_Map.png" alt="My pic" />
           </div>
         </div>
 

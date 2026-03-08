@@ -31,7 +31,7 @@ TO TUPDATE THE GIT
 
 git status
 git add .
-git commit -m "menu"
+git commit -m "mqp background"
 git push
 
 ------

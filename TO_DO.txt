@@ -3,7 +3,5 @@
 TO DO :
 
 FINAL
-- Finish image 
 - Add side map
 - Change the charcater 
-- Redo collitions 

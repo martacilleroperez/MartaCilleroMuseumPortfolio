@@ -101,7 +101,7 @@ k.loadSprite("spritesheet", "/spritesheet.png", {
 });
 
 
-k.loadSprite("floor", "/trail4.PNG")
+k.loadSprite("floor", "/back_f.PNG")
 
 
 k.setBackground(k.Color.fromHex("#610716"));
@@ -193,35 +193,39 @@ const world = k.add([
   for (const layer of layers) {
     if (layer.name === "triggers") {
       for (const trig of layer.objects) {
-        // In your JSON the trigger id is stored in properties: { name:"name", value:"" }
+    
         const triggerId = getProp(trig, "name");
         if (!triggerId) continue;
     
-        // Your trigger objects have width/height 0, so we must define a size
-        const size = 18; // tweak (12..30)
+        const bounds = polygonBounds(trig.polygon);
     
         world.add([
-          k.pos(trig.x, trig.y),
+          k.pos(trig.x + bounds.x, trig.y + bounds.y),
           k.area({
-            shape: new k.Rect(k.vec2(-size / 2, -size / 2), size, size),
+            shape: new k.Rect(k.vec2(0, 0), bounds.w, bounds.h),
           }),
           k.body({ isStatic: true }),
-          triggerId, // tag with "", "tray", "Mod6", etc.
+          triggerId,
           "trigger",
         ]);
     
         player.onCollide(triggerId, () => {
           if (player.isInDialogue) return;
+    
           player.isInDialogue = true;
-          // wiht this you are assing the trigger id into displayDialogue, the porgram konws which trigger is active.
-          displayDialogue(dialogueData[triggerId], triggerId, () => {
-            player.isInDialogue = false;
-          }, () => ({
-            // stores th pos and direction of the player when you click the button 
-            x: player.pos.x,
-            y: player.pos.y,
-            direction: player.direction,
-          }));
+    
+          displayDialogue(
+            dialogueData[triggerId],
+            triggerId,
+            () => {
+              player.isInDialogue = false;
+            },
+            () => ({
+              x: player.pos.x,
+              y: player.pos.y,
+              direction: player.direction,
+            })
+          );
         });
       }
     

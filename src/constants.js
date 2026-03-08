@@ -1,7 +1,7 @@
 
   // this is a JS mocule that exports two things a number and a text 
 
-export const scaleFactor = 3;
+export const scaleFactor = 2;
 
 
   // when the user gets near dif parts dif text apeares 
