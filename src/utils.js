@@ -17,13 +17,13 @@ export function displayDialogue(text, triggerId, onDisplayEnd, getPlayerState) {
 
   // Map: triggerId -> which button + which page
   const actions = {
-    about_me: { btn: aboutBtn, url: "/extra_pages/about_me.html" },
-    Mod6: { btn: mod6Btn, url: "/extra_pages/Mod6.html" },
-    Mod7: { btn: mod7Btn, url: "/extra_pages/Mod7.html" },
-    Mod8A: { btn: mod8ABtn, url: "/extra_pages/Mod8A.html" },
-    Mod8B: { btn: mod8BBtn, url: "/extra_pages/Mod8B.html" },
-    tray: { btn: trayBtn, url: "/extra_pages/tray.html" }, 
-    cont: { btn: contBtn, url: "/extra_pages/cont.html" },
+    about_me: { btn: aboutBtn, url: "./extra_pages/about_me.html" },
+    Mod6: { btn: mod6Btn, url: "./extra_pages/Mod6.html" },
+    Mod7: { btn: mod7Btn, url: "./extra_pages/Mod7.html" },
+    Mod8A: { btn: mod8ABtn, url: "./extra_pages/Mod8A.html" },
+    Mod8B: { btn: mod8BBtn, url: "./extra_pages/Mod8B.html" },
+    tray: { btn: trayBtn, url: "./extra_pages/tray.html" }, 
+    cont: { btn: contBtn, url: "./extra_pages/cont.html" },
   };
 
   // show dialog

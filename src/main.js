@@ -26,21 +26,21 @@ if (menuButton && extraText) {
 const aboutBtn = document.getElementById("about_menu");
 if (aboutBtn) {
   aboutBtn.addEventListener("click", () => {
-    window.location.href = "/extra_pages/about_me.html";
+    window.location.href = "./extra_pages/about_me.html";
   });
 }
 
 const trayBtn = document.getElementById("tray_menu");
 if (trayBtn) {
   trayBtn.addEventListener("click", () => {
-    window.location.href = "/extra_pages/tray.html";
+    window.location.href = "./extra_pages/tray.html";
   });
 }
 
 const contBtn = document.getElementById("cont_menu");
 if (contBtn) {
   contBtn.addEventListener("click", () => {
-    window.location.href = "/extra_pages/cont.html";
+    window.location.href = "./extra_pages/cont.html";
   });
 }
 
@@ -54,36 +54,36 @@ if (projMenuBtn && projectsMenu) {
 
 // Menu navigation buttons
 document.getElementById("about_menu").addEventListener("click", () => {
-  window.location.href = "/extra_pages/about_me.html";
+  window.location.href = "./extra_pages/about_me.html";
 });
 
 document.getElementById("tray_menu").addEventListener("click", () => {
-  window.location.href = "/extra_pages/tray.html";
+  window.location.href = "./extra_pages/tray.html";
 });
 
 document.getElementById("Mod6_menu").addEventListener("click", () => {
-  window.location.href = "/extra_pages/Mod6.html";
+  window.location.href = "./extra_pages/Mod6.html";
 });
 
 document.getElementById("Mod7_menu").addEventListener("click", () => {
-  window.location.href = "/extra_pages/Mod7.html";
+  window.location.href = "./extra_pages/Mod7.html";
 });
 
 document.getElementById("Mod8A_menu").addEventListener("click", () => {
-  window.location.href = "/extra_pages/Mod8A.html";
+  window.location.href = "./extra_pages/Mod8A.html";
 });
 
 document.getElementById("Mod8B_menu").addEventListener("click", () => {
-  window.location.href = "/extra_pages/Mod8B.html";
+  window.location.href = "./extra_pages/Mod8B.html";
 });
 
 document.getElementById("tesis_menu").addEventListener("click", () => {
-  window.location.href = "/extra_pages/tesis.html";
+  window.location.href = "./extra_pages/tesis.html";
 });
 
 
 document.getElementById("cont_menu").addEventListener("click", () => {
-  window.location.href = "/extra_pages/cont.html";
+  window.location.href = "./extra_pages/cont.html";
 });
 
 // loadind images and tools 

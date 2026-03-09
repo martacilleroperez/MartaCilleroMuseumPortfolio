@@ -31,7 +31,7 @@ TO TUPDATE THE GIT
 
 git status
 git add .
-git commit -m "build web"
+git commit -m "fix paths"
 git push
 
 ------
