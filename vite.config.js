@@ -1,8 +1,9 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  base: "/MartaCilleroMuseumPortfolio/",
+  base: "/",
   build: {
     minify: "terser",
   },
 });
+

@@ -87,7 +87,7 @@ document.getElementById("cont_menu").addEventListener("click", () => {
 });
 
 // loadind images and tools 
-k.loadSprite("spritesheet", "/spritesheet.png", {
+k.loadSprite("spritesheet", "./spritesheet.png", {
   sliceX: 39,
   sliceY: 31,
   anims: {
@@ -101,7 +101,7 @@ k.loadSprite("spritesheet", "/spritesheet.png", {
 });
 
 
-k.loadSprite("floor", "/back_f.PNG")
+k.loadSprite("floor", "./back_f.PNG")
 
 
 k.setBackground(k.Color.fromHex("#610716"));
@@ -109,7 +109,7 @@ k.setBackground(k.Color.fromHex("#610716"));
 
 // defining the main scene
 k.scene("main", async () => {
-  const mapData = await (await fetch("/Plano_2.json")).json();
+  const mapData = await (await fetch("./Plano_2.json")).json();
   const layers = mapData.layers;
   function getProp(obj, key) {
     return obj.properties?.find((p) => p.name === key)?.value;
