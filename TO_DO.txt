@@ -1,7 +1,13 @@
 
 
 TO DO :
+claude 
+- make the gradient on each of this section less strong, make a color that is more 
+similar to th emian page one 
 
-FINAL
-- Add side map
-- Change the charcater 
+
+
+- add more pricture of the projects, maybe schematics 
+- edit linkdin link 
+- update trajectory 
+- update CV

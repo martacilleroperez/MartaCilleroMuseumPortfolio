@@ -26,9 +26,10 @@ body {
   padding: 2rem;
   color: var(--text);
   min-height: 100vh;
+  /* same wine red as the museum main page (#610716), with a very subtle gradient */
   background:
-    radial-gradient(ellipse at top, rgba(97, 7, 22, 0.55), transparent 70%),
-    linear-gradient(180deg, #2a0e15 0%, #1a0d11 55%, #12080b 100%);
+    radial-gradient(ellipse at top, rgba(255, 255, 255, 0.05), transparent 60%),
+    linear-gradient(180deg, #6b0a1b 0%, #610716 55%, #560614 100%);
   background-attachment: fixed;
 }
 
