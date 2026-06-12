@@ -1,0 +1,189 @@
+/* ── Museum theme — shared by all extra pages ─────────────────────── */
+
+@font-face {
+  font-family: monogram;
+  src: url("../monogram.ttf");
+}
+
+:root {
+  --bg: #1a0d11;
+  --panel: rgba(12, 12, 14, 0.85);
+  --panel-border: #2c2c30;
+  --text: #f3ead7;
+  --muted: #b9b0a0;
+  --accent: #e8c163;
+  --wine: #610716;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: monogram, monospace;
+  font-size: 2rem;
+  margin: 0;
+  padding: 2rem;
+  color: var(--text);
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at top, rgba(97, 7, 22, 0.55), transparent 70%),
+    linear-gradient(180deg, #2a0e15 0%, #1a0d11 55%, #12080b 100%);
+  background-attachment: fixed;
+}
+
+/* back to the museum */
+.back {
+  display: inline-block;
+  margin-bottom: 1.2rem;
+  color: var(--text);
+  text-decoration: none;
+  border: 2px solid var(--panel-border);
+  border-radius: 4px;
+  padding: 0.4rem 1rem;
+  background: var(--panel);
+}
+
+.back:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* main panel */
+.wrap {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  max-width: 1100px;
+  background: rgba(12, 12, 14, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 2px solid var(--panel-border);
+  margin: 0 auto;
+  padding: 1.8rem;
+  border-radius: 8px;
+  flex-wrap: wrap;
+}
+
+.content {
+  flex: 1 1 300px;
+  min-width: 0;
+}
+
+h2 {
+  margin-top: 0;
+  color: var(--accent);
+  font-weight: normal;
+}
+
+h3 {
+  color: var(--text);
+  font-weight: normal;
+  margin-bottom: 0.3rem;
+}
+
+p {
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+a {
+  color: var(--accent);
+}
+
+/* ── images & gallery ─────────────────────────────────────────────── */
+.gallery {
+  flex: 0 1 440px;
+  min-width: 0;
+}
+
+.main-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  background: #000;
+  border: 2px solid var(--panel-border);
+  border-radius: 6px;
+  transition: transform 0.25s ease;
+}
+
+.main-img:hover {
+  transform: scale(1.03);
+}
+
+.thumbs {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.thumb {
+  width: 72px;
+  height: 54px;
+  object-fit: cover;
+  background: #000;
+  border: 2px solid var(--panel-border);
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+}
+
+.thumb:hover {
+  opacity: 1;
+}
+
+.thumb.active {
+  opacity: 1;
+  border-color: var(--accent);
+}
+
+/* images kept inside original (verbatim) content */
+.content img {
+  max-width: min(440px, 100%);
+  height: auto;
+  object-fit: contain;
+  background: #000;
+  border: 2px solid var(--panel-border);
+  border-radius: 6px;
+}
+
+/* single inline image (about, trajectory) */
+.inline-img {
+  width: min(440px, 100%);
+  object-fit: contain;
+  background: #000;
+  border: 2px solid var(--panel-border);
+  border-radius: 6px;
+  transition: transform 0.25s ease;
+}
+
+/* for images with a transparent background (e.g. the framed portrait):
+   no box, no border — the artwork floats on the page */
+.inline-img.no-box {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+.inline-img:hover {
+  transform: scale(1.03);
+}
+
+/* ── small screens ────────────────────────────────────────────────── */
+@media (max-width: 700px) {
+  body {
+    padding: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .wrap {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .gallery {
+    flex: 1 1 auto;
+  }
+}

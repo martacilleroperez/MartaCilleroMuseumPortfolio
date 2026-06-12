@@ -1,12 +1,9 @@
-
-
 export function displayDialogue(text, triggerId, onDisplayEnd, getPlayerState) {
   const dialogueUI = document.getElementById("textbox-container");
   const dialogue = document.getElementById("dialogue");
   const closeBtn = document.getElementById("close");
 
-
-  // Buttons
+  // "Know more" buttons
   const aboutBtn = document.getElementById("about_me");
   const mod6Btn = document.getElementById("Mod6");
   const mod7Btn = document.getElementById("Mod7");
@@ -22,45 +19,58 @@ export function displayDialogue(text, triggerId, onDisplayEnd, getPlayerState) {
     Mod7: { btn: mod7Btn, url: "./extra_pages/Mod7.html" },
     Mod8A: { btn: mod8ABtn, url: "./extra_pages/Mod8A.html" },
     Mod8B: { btn: mod8BBtn, url: "./extra_pages/Mod8B.html" },
-    tray: { btn: trayBtn, url: "./extra_pages/tray.html" }, 
+    tray: { btn: trayBtn, url: "./extra_pages/tray.html" },
     cont: { btn: contBtn, url: "./extra_pages/cont.html" },
   };
 
-  // show dialog
   dialogueUI.style.display = "block";
   closeBtn.style.display = "inline-block";
 
-  // Hide all "know more" buttons first
-  const allBtns = [aboutBtn, mod6Btn, mod7Btn, mod8ABtn, mod8BBtn, trayBtn, contBtn].filter(Boolean);
+  const allBtns = [
+    aboutBtn,
+    mod6Btn,
+    mod7Btn,
+    mod8ABtn,
+    mod8BBtn,
+    trayBtn,
+    contBtn,
+  ].filter(Boolean);
   for (const b of allBtns) b.style.display = "none";
 
-  // Pick the correct action for this trigger
   const action = actions[triggerId];
   if (action?.btn) action.btn.style.display = "inline-block";
 
-  // typing effect
+  // ── typing effect (steady speed, click to reveal everything) ───────
   let index = 0;
-  let currentText = "";
+  let finished = false;
+
   const intervalRef = setInterval(() => {
     if (index < text.length) {
-      currentText += text[index];
-      dialogue.innerHTML = currentText;
       index++;
+      dialogue.textContent = text.slice(0, index);
       return;
     }
+    finished = true;
     clearInterval(intervalRef);
-  }, 1);
+  }, 18);
+
+  function skipTyping() {
+    if (finished) return;
+    finished = true;
+    clearInterval(intervalRef);
+    dialogue.textContent = text;
+  }
 
   function cleanupAndClose() {
     onDisplayEnd?.();
     dialogueUI.style.display = "none";
-    dialogue.innerHTML = "";
+    dialogue.textContent = "";
     clearInterval(intervalRef);
 
     closeBtn.removeEventListener("click", onCloseClick);
-    window.removeEventListener("keypress", onKeyPress);
+    window.removeEventListener("keydown", onKeyDown);
+    dialogue.removeEventListener("click", skipTyping);
 
-    // remove button click handlers
     for (const b of allBtns) b.removeEventListener("click", onKnowMoreClick);
   }
 
@@ -69,6 +79,7 @@ export function displayDialogue(text, triggerId, onDisplayEnd, getPlayerState) {
   }
 
   function onKnowMoreClick() {
+    // remember where the player was standing so we can restore it
     const state = getPlayerState?.();
     if (state) sessionStorage.setItem("playerState", JSON.stringify(state));
 
@@ -77,21 +88,22 @@ export function displayDialogue(text, triggerId, onDisplayEnd, getPlayerState) {
     if (action?.url) window.location.href = action.url;
   }
 
-  function onKeyPress(e) {
-    if (e.code === "Enter") cleanupAndClose();
+  function onKeyDown(e) {
+    if (e.code === "Enter" || e.code === "Escape") {
+      if (!finished && e.code === "Enter") {
+        skipTyping(); // first Enter reveals the text, second closes
+        return;
+      }
+      cleanupAndClose();
+    }
   }
 
   closeBtn.addEventListener("click", onCloseClick);
-  window.addEventListener("keypress", onKeyPress);
+  window.addEventListener("keydown", onKeyDown);
+  dialogue.addEventListener("click", skipTyping);
 
-
-  // Attach the click handler to every "know more" button (only one is visible)
   for (const b of allBtns) b.addEventListener("click", onKnowMoreClick);
-
 }
-
-
-
 
 // Adjusts zoom depending on your screen shape
 export function setCamScale(k) {

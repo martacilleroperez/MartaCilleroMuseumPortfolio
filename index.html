@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>Marta Cillero — Interactive Portfolio</title>
   </head>
   <body>
     <style>
@@ -13,87 +13,19 @@
         src: url(monogram.ttf);
       }
 
-
-
-      #extraText {
-        position: absolute;
-        top: 60px;
-        right: 0;
-        width: 150px;
-        background: rgba(127, 125, 125, 0.5);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(20px);
-        padding: 1rem;
-        border-radius: 8px;
-        text-align: right;
-      }
-
-
-      #extraText p {
-        margin: 0;
+      :root {
+        --panel: rgba(12, 12, 14, 0.82);
+        --panel-border: #2c2c30;
+        --text: #f3ead7;
+        --accent: #e8c163;
+        --player: #ff5a4e;
       }
 
       body {
         font-family: monogram, monospace;
         font-size: 2rem;
         overflow: hidden;
-      }
-
-
-      .note-box {
-      position: absolute;
-      left: 5%;
-      top: 3vh;
-
-      background: rgb(127, 125, 125,0.7);
-      color: white;
-
-      padding: 1rem 1.5rem;
-      border-radius: 10px;
-
-      display: inline-block;
-      backdrop-filter: blur(10px);
-
-      filter: drop-shadow(0 0 0.5rem rgb(23, 23, 23));
-    }
-
-    .menu-box {
-      position: absolute;
-      left: 93%;
-      top: 3vh;
-
-      background: rgb(127, 125, 125,0.7);
-      color: white;
-
-      padding: 1rem 1 rem;
-      border-radius: 10px;
-
-      display: inline-flex;
-      flex-direction: column;
-      backdrop-filter: blur(10px);
-
-      filter: drop-shadow(0 0 0.5rem rgb(23, 23, 23));
-    }
-
-    .-box {
-      position: absolute;
-      left: 5%;
-      top: 20vh;
-
-      background: rgb(127, 125, 125,0.7);
-      color: white;
-
-      padding: 1rem 1.5rem;
-      border-radius: 10px;
-
-      display: inline-block;
-      backdrop-filter: blur(10px);
-
-      filter: drop-shadow(0 0 0.5rem rgb(23, 23, 23));
-    }
-
-    .hidden {
-        display: none;
+        margin: 0;
       }
 
       #app {
@@ -102,333 +34,385 @@
         position: relative;
       }
 
+      .hidden {
+        display: none;
+      }
+
+      /* ── shared panel look ───────────────────────────────────── */
+      .panel {
+        position: absolute;
+        background: var(--panel);
+        color: var(--text);
+        border: 2px solid var(--panel-border);
+        border-radius: 6px;
+        padding: 0.8rem 1.2rem;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        z-index: 10;
+      }
+
+      .note-box {
+        left: 4%;
+        top: 3vh;
+      }
+
+      .menu-box {
+        right: 2%;
+        top: 3vh;
+        display: inline-flex;
+        flex-direction: column;
+        text-align: right;
+      }
+
+      /* ── museum guide overlay ────────────────────────────────── */
+      .overlay-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        z-index: 30;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .overlay-backdrop.hidden {
+        display: none;
+      }
+
+      .g-panel {
+        background: var(--panel);
+        color: var(--text);
+        border: 2px solid var(--accent);
+        border-radius: 6px;
+        width: min(940px, 92vw);
+        max-height: 86vh;
+        overflow-y: auto;
+        padding: 1rem 1.4rem 1.4rem;
+      }
+
+      .g-header {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+        position: sticky;
+        top: 0;
+        background: rgba(12, 12, 14, 0.95);
+        padding: 0.4rem 0;
+        z-index: 2;
+      }
+
+      .g-heading {
+        color: var(--accent);
+        flex: 1;
+      }
+
+      .g-links {
+        display: flex;
+        gap: 0.4rem;
+      }
+
+      .g-close {
+        font-size: 1.6rem;
+      }
+
+      .g-sub {
+        margin: 0.3rem 0 1rem;
+        font-size: 1.5rem;
+        color: #b9b0a0;
+      }
+
+      .g-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+        gap: 1.2rem;
+      }
+
+      .g-card {
+        background: rgba(255, 255, 255, 0.04);
+        border: 2px solid var(--panel-border);
+        border-radius: 6px;
+        padding: 0.7rem;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .g-img-wrap {
+        position: relative;
+        aspect-ratio: 16 / 10;
+        background: #000;
+        border-radius: 4px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .g-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .g-placeholder {
+        color: #8a8a8a;
+        font-size: 1.6rem;
+      }
+
+      .g-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: monogram, monospace;
+        font-size: 2.2rem;
+        line-height: 1;
+        background: rgba(12, 12, 14, 0.65);
+        color: var(--text);
+        border: none;
+        border-radius: 4px;
+        width: 2.1rem;
+        height: 2.6rem;
+        cursor: pointer;
+      }
+
+      .g-arrow:hover {
+        color: var(--accent);
+      }
+
+      .g-prev {
+        left: 0.4rem;
+      }
+
+      .g-next {
+        right: 0.4rem;
+      }
+
+      .g-counter {
+        position: absolute;
+        bottom: 0.4rem;
+        right: 0.6rem;
+        font-size: 1.2rem;
+        background: rgba(12, 12, 14, 0.65);
+        padding: 0 0.4rem;
+        border-radius: 3px;
+      }
+
+      .g-title {
+        margin: 0.6rem 0 0.2rem;
+        font-size: 1.7rem;
+        font-weight: normal;
+        color: var(--accent);
+      }
+
+      .g-blurb {
+        margin: 0;
+        font-size: 1.45rem;
+        line-height: 1.25;
+        flex: 1;
+      }
+
+      .g-open {
+        margin-top: 0.6rem;
+        align-self: flex-end;
+        color: var(--text);
+        text-decoration: none;
+        border: 2px solid var(--panel-border);
+        border-radius: 3px;
+        padding: 0.2rem 0.7rem;
+        font-size: 1.45rem;
+      }
+
+      .g-open:hover {
+        color: var(--accent);
+        border-color: var(--accent);
+      }
+
+      /* ── minimap: black tracker in the bottom-right corner ───── */
+      .minimap-box {
+        right: 2%;
+        bottom: 3vh;
+        padding: 0.6rem 0.8rem;
+        background: #000;
+        border-color: var(--accent);
+      }
+
+      .minimap-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        font-size: 1.4rem;
+        color: var(--accent);
+        margin-bottom: 0.4rem;
+        user-select: none;
+      }
+
+      #minimap-progress {
+        color: var(--text);
+      }
+
+      #minimap-canvas {
+        display: block;
+        image-rendering: pixelated;
+        cursor: pointer;
+      }
+
+      .minimap-hint {
+        margin: 0.4rem 0 0;
+        font-size: 1.2rem;
+        color: #8a8a8a;
+        user-select: none;
+      }
+
+      /* full map overlay (opens when you click the minimap) */
+      .map-overlay {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 20;
+        text-align: center;
+      }
+
+      .Map__avatar {
+        width: min(500px, 80vw);
+        aspect-ratio: 1 / 1;
+        height: auto;
+        object-fit: contain;
+        display: block;
+      }
+
+      /* ── buttons ─────────────────────────────────────────────── */
+      .ui-menu-btn {
+        font-family: monogram, monospace;
+        border: none;
+        border-radius: 3px;
+        font-size: inherit;
+        text-decoration: none;
+        background: transparent;
+        color: inherit;
+        cursor: pointer;
+        padding: 0.2rem 0.4rem;
+        text-align: right;
+      }
+
+      .ui-menu-btn:hover {
+        color: var(--accent);
+      }
+
+      /* ── dialogue box ────────────────────────────────────────── */
       #textbox {
         position: absolute;
         left: 10%;
         right: 10%;
         bottom: 2vh;
         min-height: 10vh;
-        background: white;
-        border-radius: 3px;
-        outline-style: solid;
+        background: var(--panel);
+        color: var(--text);
+        border: 2px solid var(--accent);
+        border-radius: 6px;
         padding: 1rem;
         display: flex;
         flex-direction: column;
-        flex-wrap: wrap;
         justify-content: flex-start;
         align-items: flex-start;
         word-spacing: 0.2rem;
-        filter: drop-shadow(0 0 0.75rem rgb(112, 112, 112));
-        /* overflow: auto; */
+        backdrop-filter: blur(10px);
+        z-index: 15;
       }
-
-      .Map__avatar {
-        width: min(500px, 100%);  /* doubled from 500px */
-        aspect-ratio: 1 / 1;       
-        height: auto;
-        object-fit: contain;   
-        overflow: hidden;    
-        display: block;  
-        margin-left: 10px;
-        }
 
       .ui-text {
         margin: 0;
         user-select: none;
+        cursor: pointer; /* click to skip the typing effect */
       }
 
-      .ui-menu-btn {
-        font-family: monogram, monospace;
-        border-style: none;
-        border-radius: 3px;
-        padding: 1rem;
-        font-size: inherit;           
-        text-decoration: none; 
-
-        background: transparent;   /* removes white button background */
-        color: inherit;            /* uses menu-box text color */
-        cursor: pointer;           /* makes it behave like a button */
-      }
-
-      .map-box {
-      position: absolute;
-      left: 5%;
-      top: 21vh; /* below note-box */
-      background: rgba(127, 125, 125, 0.7);
-      color: white;
-      padding: 1rem 1.5rem;
-      border-radius: 10px;
-      display: inline-block; /* important: box fits content */
-      backdrop-filter: blur(10px);
-      filter: drop-shadow(0 0 0.5rem rgb(23, 23, 23));
-      z-index: 10; /* ensure it's above the canvas */
-    }
-
-      .ui-about-menu-btn {
-        font-family: monogram, monospace;
-        border-style: none;
-        border-radius: 3px;
-        font-size: inherit;           
-        text-decoration: none;
-        background: transparent;   
-        color: inherit;           
-        cursor: pointer;           
-      }
-
-      .ui-traymap-menu-btn {
-        font-family: monogram, monospace;
-        border-style: none;
-        border-radius: 3px;
-        font-size: inherit;           
-        text-decoration: none;
-        background: transparent;   
-        color: inherit;           
-        cursor: pointer;           
-      }
-
-      .ui-map-btn{
-        font-family: monogram, monospace;
-        border-style: none;
-        border-radius: 3px;
-        font-size: inherit;           
-        text-decoration: none;
-        background: transparent;   
-        color: inherit;           
-        cursor: pointer;           
-      }
-
-      .ui-proj-menu-btn {
-        font-family: monogram, monospace;
-        border-style: none;
-        border-radius: 3px;
-        font-size: inherit;           
-        text-decoration: none;
-        background: transparent;   
-        color: inherit;           
-        cursor: pointer;           
-      }
-
-      .ui-cont-menu-btn {
-        font-family: monogram, monospace;
-        border-style: none;
-        border-radius: 3px;
-        font-size: inherit;           
-        text-decoration: none;
-        background: transparent;   
-        color: inherit;           
-        cursor: pointer;           
-      }
-      .ui-Mod6-menu-btn {
-        font-family: monogram, monospace;
-        border-style: none;
-        border-radius: 3px;
-        font-size: inherit;           
-        text-decoration: none;
-        background: transparent;   
-        color: inherit;           
-        cursor: pointer;           
-      }
-
-      .ui-Mod7-menu-btn {
-        font-family: monogram, monospace;
-        border-style: none;
-        border-radius: 3px;
-        font-size: inherit;           
-        text-decoration: none;
-        background: transparent;   
-        color: inherit;           
-        cursor: pointer;           
-      }
-
-      .ui-Mod8A-menu-btn {
-        font-family: monogram, monospace;
-        border-style: none;
-        border-radius: 3px;
-        font-size: inherit;           
-        text-decoration: none;
-        background: transparent;   
-        color: inherit;           
-        cursor: pointer;           
-      }
-      .ui-tray-menu-btn {
-        font-family: monogram, monospace;
-        border-style: none;
-        border-radius: 3px;
-        font-size: inherit;           
-        text-decoration: none;
-        background: transparent;   
-        color: inherit;           
-        cursor: pointer;           
-      }
-
-      .ui-Mod8B-menu-btn {
-        font-family: monogram, monospace;
-        border-style: none;
-        border-radius: 3px;
-        font-size: inherit;           
-        text-decoration: none;
-        background: transparent;   
-        color: inherit;           
-        cursor: pointer;           
-      }
-
-      .ui-tesis-menu-btn {
-        font-family: monogram, monospace;
-        border-style: none;
-        border-radius: 3px;
-        font-size: inherit;           
-        text-decoration: none;
-        background: transparent;   
-        color: inherit;           
-        cursor: pointer;           
-      }
-      
-
-
-      .ui-close-btn {
-        font-family: monogram, monospace;
-        border-style: none;
-        border-radius: 3px;
-        padding: 1rem;
-        font-size: inherit;
-      }
-
-      .ui-about-btn {
-        font-family: monogram, monospace;
-        border-style: none;
-        border-radius: 3px;
-        padding: 1rem;
-        font-size: inherit;
-        display: none;            
-        text-decoration: none; 
-      }
-
-      .ui-Mod6-btn {
-        font-family: monogram, monospace;
-        border-style: none;
-        border-radius: 3px;
-        padding: 1rem;
-        font-size: inherit;
-        display: none;            
-        text-decoration: none; 
-      }
-
-      .ui-Mod7-btn {
-        font-family: monogram, monospace;
-        border-style: none;
-        border-radius: 3px;
-        padding: 1rem;
-        font-size: inherit;
-        display: none;            
-        text-decoration: none; 
-      }
-
-      .ui-Mod8A-btn {
-        font-family: monogram, monospace;
-        border-style: none;
-        border-radius: 3px;
-        padding: 1rem;
-        font-size: inherit;
-        display: none;            
-        text-decoration: none; 
-      }
-
-      .ui-Mod8B-btn {
-        font-family: monogram, monospace;
-        border-style: none;
-        border-radius: 3px;
-        padding: 1rem;
-        font-size: inherit;
-        display: none;            
-        text-decoration: none; 
-      }
-
-      .ui-tray-btn {
-        font-family: monogram, monospace;
-        border-style: none;
-        border-radius: 3px;
-        padding: 1rem;
-        font-size: inherit;
-        display: none;            
-        text-decoration: none; 
-      }
-      .ui-cont-btn {
-        font-family: monogram, monospace;
-        border-style: none;
-        border-radius: 3px;
-        padding: 1rem;
-        font-size: inherit;
-        display: none;            
-        text-decoration: none; 
-      }
       .btn-container {
         align-self: flex-end;
         margin-top: 1rem;
       }
 
-      .note {
-        position: absolute;
-        left: 5%;
-        top: 1vh;
-        display: flex;
-        flex-direction: column;
-        color: rgb(238, 238, 238);
+      .ui-action-btn {
+        font-family: monogram, monospace;
+        border: 2px solid var(--panel-border);
+        border-radius: 3px;
+        padding: 0.5rem 1rem;
+        font-size: inherit;
+        background: transparent;
+        color: var(--text);
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .ui-action-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      .know-more {
+        display: none;
       }
     </style>
+
     <div id="app">
       <div>
-        <div class="note-box">
-          Welcome to my digital portfolio.<br>
-          My name is Marta!<br>
-          You can either explore the museum<br>
+        <div class="panel note-box">
+          Welcome to my digital portfolio.<br />
+          My name is Marta!<br />
+          You can either explore the museum<br />
           or use the menu bar.
-        </p>
         </div>
 
-        <div class="menu-box">
+        <div class="panel menu-box">
           <button id="menu" class="ui-menu-btn">Menu</button>
-        
-          <div id="extraText" class="hidden">
-            <button id="about_menu" class="ui-about-menu-btn">About me</button>
-            <button id="tray_menu" class="ui-tray-menu-btn">Trayectory</button>
-        
-            <button id="proj_menu" class="ui-proj-menu-btn">Projects ▸</button>
-        
-            <div id="projectsMenu" class="hidden">
-              <button id="Mod6_menu" class="ui-Mod6-menu-btn">Mod 6</button>
-              <button id="Mod7_menu" class="ui-Mod7-menu-btn">Mod 7</button>
-              <button id="Mod8A_menu" class="ui-Mod8A-menu-btn">Mod 8A</button>
-              <button id="Mod8B_menu" class="ui-Mod8B-menu-btn">Mod 8B</button>
-              <button id="tesis_menu" class="ui-tesis-menu-btn">Tesis</button>
+        </div>
+
+        <!-- museum guide overlay: project sneak peeks -->
+        <div id="menuOverlay" class="overlay-backdrop hidden">
+          <div class="g-panel">
+            <div class="g-header">
+              <span class="g-heading">Museum guide</span>
+              <div class="g-links">
+                <button id="about_menu" class="ui-menu-btn">About me</button>
+                <button id="tray_menu" class="ui-menu-btn">Trajectory</button>
+                <button id="cont_menu" class="ui-menu-btn">Contact</button>
+              </div>
+              <button id="galleryClose" class="ui-menu-btn g-close">✕</button>
             </div>
-        
-            <button id="cont_menu" class="ui-cont-menu-btn">Contact me</button>
+            <p class="g-sub">
+              A sneak peek of every project — browse the images here, or open
+              one to see the full story.
+            </p>
+            <div id="galleryGrid" class="g-grid"></div>
           </div>
         </div>
 
-        <div class="map-box">
-          <button id="map" class="ui-map-btn">Map</button>
-        
-          <div id="mapText" class="hidden">
-            <img class="Map__avatar" src="./S_Map.png" alt="My pic" />
+        <!-- black minimap tracker, bottom-right corner -->
+        <div class="panel minimap-box">
+          <div class="minimap-header">
+            <span>Museum map</span>
+            <span id="minimap-progress">0/0 seen</span>
           </div>
+          <canvas id="minimap-canvas" width="180" height="140"></canvas>
+          <p class="minimap-hint">Click map to enlarge</p>
         </div>
 
-     
+        <!-- full map overlay -->
+        <div id="mapText" class="panel map-overlay hidden">
+          <img class="Map__avatar" src="./S_Map.png" alt="Full museum map" />
+        </div>
 
         <div id="textbox-container" style="display: none">
           <div id="textbox">
             <p id="dialogue" class="ui-text"></p>
             <div class="btn-container">
-              <button id="close" class="ui-close-btn">Close</button>
-              <button id="about_me" class="ui-about-btn">Know more ...</button>
-              <button id="Mod6" class="ui-Mod6-btn">Know more ... </button>
-              <button id="Mod7" class="ui-Mod7-btn">Know more ...</button>
-              <button id="Mod8A" class="ui-Mod8A-btn">Know more... </button>
-              <button id="Mod8B" class="ui-Mod8B-btn">Know more ... </button>
-              <button id="tray" class="ui-tray-btn">Know more ... </button>
-              <button id="cont" class="ui-cont-btn">Know more ...</button>
-
+              <button id="close" class="ui-action-btn">Close</button>
+              <button id="about_me" class="ui-action-btn know-more">Know more ...</button>
+              <button id="Mod6" class="ui-action-btn know-more">Know more ...</button>
+              <button id="Mod7" class="ui-action-btn know-more">Know more ...</button>
+              <button id="Mod8A" class="ui-action-btn know-more">Know more ...</button>
+              <button id="Mod8B" class="ui-action-btn know-more">Know more ...</button>
+              <button id="tray" class="ui-action-btn know-more">Know more ...</button>
+              <button id="cont" class="ui-action-btn know-more">Know more ...</button>
             </div>
           </div>
         </div>
