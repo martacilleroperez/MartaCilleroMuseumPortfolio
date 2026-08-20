@@ -156,6 +156,15 @@ export function markVisited(id) {
   updateCounter();
 }
 
+export function resetVisited() {
+  state.visited.clear();
+  localStorage.removeItem(STORAGE_KEY);
+  updateCounter();
+}
+
+
 export function isVisited(id) {
   return state.visited.has(id);
 }
+
+

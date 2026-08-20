@@ -1,7 +1,13 @@
 import { dialogueData, scaleFactor } from "./constants";
 import { k } from "./kaboomCtx";
 import { displayDialogue, setCamScale } from "./utils";
-import { initMinimap, updateMinimapPlayer, markVisited, isVisited } from "./minimap";
+import {
+  initMinimap,
+  updateMinimapPlayer,
+  markVisited,
+  isVisited,
+  resetVisited
+} from "./minimap";
 import { initGallery, toggleGallery, isGalleryOpen } from "./gallery";
 
 // ── restore player position (after coming back from a project page) ──
@@ -248,11 +254,14 @@ k.scene("main", async () => {
 
   // ── minimap ────────────────────────────────────────────────────────
   // floor image is 900x700, scaled by scaleFactor → world size
-  initMinimap({
-    worldW: 900 * scaleFactor,
-    worldH: 700 * scaleFactor,
-    exhibits: exhibitPoints,
-  });
+ resetVisited();
+
+// floor image is 900x700, scaled by scaleFactor → world size
+initMinimap({
+  worldW: 900 * scaleFactor,
+  worldH: 700 * scaleFactor,
+  exhibits: exhibitPoints,
+});
 
   // ── camera ─────────────────────────────────────────────────────────
   setCamScale(k);
