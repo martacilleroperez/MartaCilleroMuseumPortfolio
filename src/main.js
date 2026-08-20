@@ -171,7 +171,7 @@ k.scene("main", async () => {
           k.sprite("marker-arrow"),
           k.pos(markerX, markerY),
           k.anchor("center"),
-          k.opacity(seen ? 0.3 : 1),
+          k.opacity(0.7),
           k.z(100),
           {
             baseY: markerY,
