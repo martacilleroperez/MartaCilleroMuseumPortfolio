@@ -14,6 +14,13 @@ import { initGallery, toggleGallery, isGalleryOpen } from "./gallery";
 const saved = sessionStorage.getItem("playerState");
 const savedState = saved ? JSON.parse(saved) : null;
 
+const museumStarted = sessionStorage.getItem("museumStarted");
+
+if (!museumStarted) {
+  resetVisited();
+  sessionStorage.setItem("museumStarted", "true");
+}
+
 // ── menu UI ──────────────────────────────────────────────────────────
 initGallery();
 
@@ -254,7 +261,7 @@ k.scene("main", async () => {
 
   // ── minimap ────────────────────────────────────────────────────────
   // floor image is 900x700, scaled by scaleFactor → world size
- resetVisited();
+
 
 // floor image is 900x700, scaled by scaleFactor → world size
 initMinimap({

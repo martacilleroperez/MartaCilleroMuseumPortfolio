@@ -22,7 +22,7 @@ const PROJECTS = [
   },
   {
     id: "Mod8B",
-    title: "Awareness installation",
+    title: "Smoking/ alchohol awareness installation",
     blurb:
       "An installation to raise awareness of the dangers of smoking and drinking.",
     images: [
@@ -39,7 +39,7 @@ const PROJECTS = [
   },
     {
     id: "Mod7",
-    title: "AI stretching game",
+    title: "Gamified stretching with AI",
     blurb:
       "An algorithm that uses Artificial Intelligence to help users stretch through a game.",
     images: ["./img/Mod7_1.png", "./img/Mod7_2.png"],
@@ -57,7 +57,7 @@ const PROJECTS = [
 
   {
     id: "Mod6",
-    title: "Running feedback",
+    title: "Overstriding running feedback ",
     blurb:
       "Reducing overstriding, one of the most common issues among runners, through real-time feedback.",
     images: ["./img/Mod6_1.png", "./img/Mod6_2.png"],
