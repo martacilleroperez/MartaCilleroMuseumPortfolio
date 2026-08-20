@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About me</title>
+    <link rel="stylesheet" href="./museum.css" />
+  </head>
+
+  <body>
+    <a class="back" href="../index.html">Back</a>
+
+    <section class="wrap">
+      <img
+        class="inline-img no-box my-photo animate__animated"
+        src="../img/about_me_pic.PNG"
+        alt="My pic"
+      />
+
+      <div class="content">
+          <h2>About Me</h2>
+          <p>Hello! My name is Marta Cillero, MSc student in Artificial Intelligence  in King's Collage London specializing 
+            in the application of generative models and multimodal algorithms to art and culture. With a background 
+            in Creative Technology and interdisciplinary engineering, including a research internship at the University of
+            Zurich applying different AI algorithms in the  analysis and reconstruction from period artwork.  Passionate about 
+            research-led innovation in AI, art, and heritage. </p>
+      </div>
+    </section>
+
+    <script>
+      const img = document.querySelector(".my-photo");
+      if (img) {
+        img.addEventListener("mouseenter", () => {
+          img.classList.remove("animate__swing"); // reset if already applied
+          void img.offsetWidth; // force reflow so it can replay
+          img.classList.add("animate__swing");
+        });
+
+        img.addEventListener("animationend", () => {
+          img.classList.remove("animate__swing");
+        });
+      }
+    </script>
+  </body>
+</html>
