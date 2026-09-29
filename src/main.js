@@ -134,7 +134,7 @@ k.scene("main", async () => {
     k.pos(),
     k.scale(scaleFactor * 1.5),
     {
-      speed: 150,
+      speed: 150, 
       direction: "down",
       isInDialogue: false,
     },
@@ -182,7 +182,7 @@ k.scene("main", async () => {
           k.z(100),
           {
             baseY: markerY,
-            phase: markerX, // desync the bobbing between markers
+            phase: markerX, 
           },
           "exhibit-marker",
           `marker-${triggerId}`,

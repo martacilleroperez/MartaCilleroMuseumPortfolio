@@ -1,3 +1,12 @@
+
+UPDATE THE GIT 
+
+git status
+git add .
+git commit -m "update text"
+git push
+
+
 WHEN I DO THE JASON AGIAN RMEBER TO ADD THE :
 
 {
@@ -27,12 +36,7 @@ WHEN I DO THE JASON AGIAN RMEBER TO ADD THE :
 
 
 
-TO TUPDATE THE GIT 
 
-git status
-git add .
-git commit -m "update text"
-git push
 
 ------
 
